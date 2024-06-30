@@ -166,6 +166,27 @@ export async function fetchCardData() {
     throw new Error('Failed to fetch card data.');
   }
 }
+export async function fetchUser() {
+  try{
+    const data= await sql`SELECT COUNT(*) from users`;
+    const numberOfUsers = Number(data.rows[0].count ?? '0');
+    return numberOfUsers;
+  }catch(error){
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch user data.');
+  }
+
+}
+export async function fetchTotalRevenue() {
+  try {
+    const data = await sql`SELECT SUM(revenue) from revenue`;
+    const totalRevenue = formatCurrency(data.rows[0].sum ?? '0');
+    return totalRevenue;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
+}
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
