@@ -9,6 +9,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+import axios from 'axios';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -185,6 +186,17 @@ export async function fetchTotalRevenue() {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch revenue data.');
+  }
+}
+
+export async function fetchApiCustomer() {
+  try {
+    const {data} = await axios.get(" https://jsonplaceholder.typicode.com/todos/");
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch Api data.');
   }
 }
 

@@ -8,7 +8,12 @@ export type User = {
   email: string;
   password: string;
 };
-
+export type data = {
+  userId : number;
+  id : number;
+  title : string;
+  completed: boolean;
+}
 export type Customer = {
   id: string;
   name: string;
