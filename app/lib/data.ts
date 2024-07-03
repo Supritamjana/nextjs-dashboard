@@ -200,6 +200,20 @@ export async function fetchApiCustomer() {
   }
 }
 
+export async function currentRevenue() {
+  try{
+    let date = new Date();
+    let allmonth = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    let month = allmonth[date.getMonth()]
+    const data = await sql`SELECT revenue FROM revenue WHERE month = ${month}`;
+    const currentRevenue = formatCurrency(data.rows[0].revenue ?? '0');
+    return currentRevenue;
+  } catch(error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch revenue data.');
+  }
+}
+
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
